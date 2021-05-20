@@ -1,34 +1,32 @@
-# Delete DNS Record Action for GitHub
+# CloudFlare DNS: Delete Record
 
-Removes CloudFlare DNS record by ID or record name.
+Removes specified DNS record using CloudFlare API.
 
-## Usage via Github Actions
+Based on Action https://github.com/marketplace/actions/cloudflare-delete-dns-record
+
+## Usage example
 
 ```yaml
-name: example
+name: Delete DNS Record
+
 on:
   pull_request:
     type: [closed]
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: infraway/delete-dns-record@v2.0
+      - uses: Bluesboy/delete-dns-record@v2.1
         with:
           name: "review.example.com"
           token: ${{ secrets.CLOUDFLARE_TOKEN }}
           zone: ${{ secrets.CLOUDFLARE_ZONE }}
 ```
 
-## Usage via docker image
+To create CloudFlare API Token follow instructions on https://developers.cloudflare.com/api/tokens/create
 
-```shell script
-docker run -it --rm \
-  -e "INPUT_TOKEN=1" \
-  -e "INPUT_ZONE=2" \
-  -e "INPUT_NAME=review.example.com" \
-  infraway/cloudflare-delete-dns-record 
-```
+You can see Zone ID in bottom right of your zone overview page on CloudFlare
 
 ## License
 
